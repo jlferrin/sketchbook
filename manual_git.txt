@@ -1,0 +1,491 @@
+# -- -----------------
+# -- OPERACION
+# -- -----------------
+# -- CONSULTA REPO
+# -- -----------------
+# -- BRANCHES
+# -- -----------------
+# -- -----------------
+# -- CREACION DE REPO
+# -- -----------------
+# -- CLONAR REPO REMOTO
+# -- -----------------
+# -- SUBMODULOS
+# -- -----------------
+# -- ACTUALIZAR REPO LOCAL
+# -- -----------------
+# -- -----------------
+# -- -----------------
+# -- -----------------
+# -- -----------------
+# -- -----------------
+
+# -- -----------------
+# -- OPERACION
+# -- -----------------
+
+# Añadir un fichero o directorio (lo ultimo con todo!!)
+# -- --------------
+
+git add <fichero|directorio>
+
+# Borrar un fichero
+# -- --------------
+
+git rm <fichero>
+git rm -f <fichero> # i ya está modificado y en el index
+
+# Commitear
+# -- --------------
+
+git commit -a -m "<Comentario>"
+
+# Subir al servidor
+# -- --------------
+
+git push origin
+
+# Descartar cambios
+# -- --------------
+
+[operador@localhost curso_c]$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   Makefile
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+[operador@localhost curso_c]$ git checkout -- Makefile
+
+[operador@localhost curso_c]$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working directory clean
+
+# -- -----------------
+# -- CONSULTA REPO
+# -- -----------------
+
+# CONSULTA ESTADO
+# -- --------------
+
+[operador@localhost curso_c]$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   Makefile
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+# CONSULTA REPO REMOTO
+# -- --------------
+
+[operador@localhost curso_c]$ git remote -v
+origin	ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git (fetch)
+origin	ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git (push)
+
+
+[operador@localhost curso_c]$ git remote show origin
+gituser@nas00's password: 
+* remote origin
+  Fetch URL: ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git
+  Push  URL: ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git
+  HEAD branch: master
+  Remote branch:
+    master tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+
+# -- -----------------
+# -- BRANCHES
+# -- -----------------
+
+[operador@localhost curso_c]$ git log
+ESC[33mcommit a84ca77e9321458cca6317d3936dce0c1f17faf3ESC[m
+Author: Juanele <jlferrin@yahoo.es>
+Date:   Wed Aug 19 20:20:10 2015 +0200
+
+    Primer Commit. Agosto 2015
+
+# CREA BRANCHES
+# -- --------------
+
+[operador@localhost curso_c]$ git branch TestRama
+
+[operador@localhost curso_c]$ git log
+ESC[33mcommit a84ca77e9321458cca6317d3936dce0c1f17faf3ESC[m
+Author: Juanele <jlferrin@yahoo.es>
+Date:   Wed Aug 19 20:20:10 2015 +0200
+
+    Primer Commit. Agosto 2015
+
+[operador@localhost curso_c]$ git commit -a -m "Cambios Make"
+[master e9b4f6e] Cambios Make
+ 1 file changed, 15 insertions(+), 6 deletions(-)
+
+[operador@localhost curso_c]$ git log
+ESC[33mcommit e9b4f6eafd3ec321d838c73c8fdaf39e9025fa8aESC[m
+Author: Juanele <jlferrin@yahoo.es>
+Date:   Wed Aug 19 22:06:26 2015 +0200
+
+    Cambios Make
+
+ESC[33mcommit a84ca77e9321458cca6317d3936dce0c1f17faf3ESC[m
+Author: Juanele <jlferrin@yahoo.es>
+Date:   Wed Aug 19 20:20:10 2015 +0200
+
+    Primer Commit. Agosto 2015
+
+# CONSULTA BRANCHES
+# -- --------------
+
+[operador@localhost curso_c]$ git branch
+  TestRama
+* master
+
+[operador@localhost curso_c]$ git push origin
+gituser@nas00's password: 
+Counting objects: 3, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 457 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git
+   a84ca77..e9b4f6e  master -> master
+
+[operador@localhost curso_c]$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   Makefile
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+# CAMBIO DE BRANCHES
+# -- ---------------
+
+[operador@localhost curso_c]$ git checkout TestRama
+error: Your local changes to the following files would be overwritten by checkout:
+	Makefile
+Please, commit your changes or stash them before you can switch branches.
+Aborting
+
+[operador@localhost curso_c]$ git stash
+Saved working directory and index state WIP on master: e9b4f6e Cambios Make
+HEAD is now at e9b4f6e Cambios Make
+
+[operador@localhost curso_c]$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working directory clean
+
+[operador@localhost curso_c]$ git branch
+  TestRama
+* master
+
+[operador@localhost curso_c]$ git stash list
+stash@{0}: WIP on master: e9b4f6e Cambios Make
+
+[operador@localhost curso_c]$ git checkout TestRama
+Switched to branch 'TestRama'
+
+[operador@localhost curso_c]$ git branch
+* TestRama
+  master
+
+[operador@localhost curso_c]$ cat Makefile 
+mistat : main.o
+	cc -o mistat main.o
+
+main.o : main.c
+	cc -c main.c
+
+clean : 
+	rm mistat main.o
+
+[operador@localhost curso_c]$ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+
+[operador@localhost curso_c]$ git branch
+  TestRama
+* master
+
+[operador@localhost curso_c]$ cat Makefile 
+CC=gcc
+CFLAGS=-c -Wall
+LDFLAGS=
+SOURCES=main.c
+OBJECTS=$(SOURCES:.c=.o)
+EXECUTABLE=mistat
+
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm *.o mistat
+
+[operador@localhost curso_c]$ git stash list
+stash@{0}: WIP on master: e9b4f6e Cambios Make
+
+[operador@localhost curso_c]$ git stash apply
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   Makefile
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+[operador@localhost curso_c]$ cat Makefile 
+CC=gcc
+CFLAGS=-c -Wall
+SOURCES=main.c
+OBJECTS=$(SOURCES:.c=.o)
+EXECUTABLE=mistat
+
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm *.o mistat
+
+# -- -----------------
+# -- CREACION DE REPO
+# -- -----------------
+
+# SERVIDOR SYNOLOGY
+# -- -----------------
+
+nas00> cd /volume2/REPO.GIT
+nas00> mkdir curso_c.git
+nas00> cd curso_c.git/
+
+nas00> git --bare init
+Initialized empty Git repository in /volume2/REPO.GIT/curso_c.git/
+nas00> git update-server-info
+
+nas00> cd ..
+nas00> ll
+drwxr-xr-x    4 root     root          4096 Aug 19 19:36 .
+drwxr-xr-x   13 root     root          4096 Aug 19 18:39 ..
+drwxr-xr-x    7 root     root          4096 Aug 19 19:36 curso_c.git
+drwxrwsr-x    7 gituser  users         4096 Mar  3 23:02 fp.nodejs
+nas00> chown -R gituser:users curso_c.git 
+
+# CLIENTE LINUX
+# -- -----------------
+
+[operador@localhost devel]$ git clone ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git
+Cloning into 'curso_c'...
+gituser@nas00's password: 
+warning: You appear to have cloned an empty repository.
+Checking connectivity... done.
+
+[operador@localhost devel]$ cd curso_c/
+[operador@localhost curso_c]$ ll
+total 0
+[operador@localhost curso_c]$ ll -a
+total 6
+drwxrwxr-x.  3 operador operador 1024 ago 19 20:16 .
+drwxrwxr-x. 12 operador operador 1024 ago 19 20:09 ..
+drwxrwxr-x.  7 operador operador 1024 ago 19 20:16 .git
+
+[operador@localhost curso_c]$ git remote -v
+origin	ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git (fetch)
+origin	ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git (push)
+
+[operador@localhost curso_c]$ cp ../micurso_c/
+.git/     main.c    main.o    Makefile  mistat    test/     
+[operador@localhost curso_c]$ cp ../micurso_c/main.c .
+[operador@localhost curso_c]$ cp ../micurso_c/Makefile .
+[operador@localhost curso_c]$ cp -R ../micurso_c/test .
+[operador@localhost curso_c]$ ll
+total 9
+-rwxr-xr-x. 1 operador operador 3930 ago 19 20:17 main.c
+-rw-rw-r--. 1 operador operador   96 ago 19 20:17 Makefile
+drwxrwxr-x. 2 operador operador 1024 ago 19 20:18 test
+[operador@localhost curso_c]$ ll test/
+total 1965
+-rw-rw-r--. 1 operador operador       0 ago 19 20:18 test1.txt
+-rw-rw-r--. 1 operador operador    1091 ago 19 20:18 test2.txt
+lrwxrwxrwx. 1 operador operador      14 ago 19 20:18 test3.txt -> test/test2.txt
+-rw-rw-r--. 1 operador operador 1996133 ago 19 20:18 test4.txt
+
+[operador@localhost curso_c]$ git add .
+[operador@localhost curso_c]$ git log
+fatal: bad default revision 'HEAD'
+[operador@localhost curso_c]$ git commit -a -m "Primer Commit. Agosto 2015"
+[master (root-commit) a84ca77] Primer Commit. Agosto 2015
+ 6 files changed, 35602 insertions(+)
+ create mode 100644 Makefile
+ create mode 100755 main.c
+ create mode 100644 test/test1.txt
+ create mode 100644 test/test2.txt
+ create mode 120000 test/test3.txt
+ create mode 100644 test/test4.txt
+
+[operador@localhost curso_c]$ git push origin master
+gituser@nas00's password: 
+Counting objects: 9, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (9/9), 238.41 KiB | 0 bytes/s, done.
+Total 9 (delta 0), reused 0 (delta 0)
+To ssh://gituser@nas00/volume2/REPO.GIT/curso_c.git
+ * [new branch]      master -> master
+
+
+# -- -----------------
+# -- CLONAR REPO REMOTO
+# -- -----------------
+
+# -- Clonar parte de un repo remoto
+git clone -b webjs --single-branch git://sourceware.org/git/pcpfans.git
+
+# -- -----------------
+# -- SUBMODULOS
+# -- -----------------
+# Añadir un REPO remoto como parte de tu proyecto:
+
+mkdir RASPBERRY
+cat > RASPBERRY/leeme.txt <<EOF
+# Proyectos en Raspberry Pi
+
+* RF: 
+**  Librerias 
+*** 433utils
+*** WiringPi
+EOF
+
+git submodule add git://git.drogon.net/wiringPi RASPBERRY/wiringPi
+git submodule add git://github.com/ninjablocks/433utils.git RASPBERRY/433utils
+
+pi@raspberrypi ~/sketchbook $ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   .gitmodules
+#	new file:   RASPBERRY/433utils
+#	new file:   RASPBERRY/leeme.txt
+#	new file:   RASPBERRY/wiringPi
+#
+
+pi@raspberrypi ~/sketchbook $ git commit
+[master bfefc20] Codigo raspberry: librerias 433utils y wiringPi
+ Committer: Juan L. Ferrin <pi@raspberrypi.(none)>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 16 insertions(+)
+ create mode 100644 .gitmodules
+ create mode 160000 RASPBERRY/433utils
+ create mode 100644 RASPBERRY/leeme.txt
+ create mode 160000 RASPBERRY/wiringPi
+
+pi@raspberrypi ~/sketchbook $ git status
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#
+nothing to commit (working directory clean)
+pi@raspberrypi ~/sketchbook $ git push origin
+gituser@nas00's password: 
+Counting objects: 6, done.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 652 bytes, done.
+Total 5 (delta 1), reused 0 (delta 0)
+To ssh://gituser@nas00/volume2/REPO.GIT/sketchbook.git
+   1b5414f..bfefc20  master -> master
+
+
+-- REFRESCAR LOS SUBMODULOS (Por defecto no se suben al servidor):
+
+[operador@localhost sketchbook]$ git submodule init
+Submodule 'RASPBERRY/433utils' (git://github.com/ninjablocks/433utils.git) registered for path 'RASPBERRY/433utils'
+Submodule 'RASPBERRY/wiringPi' (git://git.drogon.net/wiringPi) registered for path 'RASPBERRY/wiringPi'
+No submodule mapping found in .gitmodules for path 'libraries/rc-switch'
+
+[operador@localhost sketchbook]$ git submodule update
+Cloning into 'RASPBERRY/433utils'...
+remote: Counting objects: 139, done.
+remote: Total 139 (delta 0), reused 0 (delta 0), pack-reused 139
+Receiving objects: 100% (139/139), 30.61 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (59/59), done.
+Checking connectivity... done.
+Submodule path 'RASPBERRY/433utils': checked out 'f6f3971c32427e1a47c2e16b5363b6e164e785df'
+Cloning into 'RASPBERRY/wiringPi'...
+remote: Counting objects: 914, done.
+remote: Compressing objects: 100% (748/748), done.
+remote: Total 914 (delta 654), reused 217 (delta 142)
+Receiving objects: 100% (914/914), 285.58 KiB | 341.00 KiB/s, done.
+Resolving deltas: 100% (654/654), done.
+Checking connectivity... done.
+Submodule path 'RASPBERRY/wiringPi': checked out 'd79506694d7ba1c3da865d095238289d6175057d'
+No submodule mapping found in .gitmodules for path 'libraries/rc-switch'
+
+
+# -- -----------------
+# -- ACTUALIZAR REPO LOCAL
+# -- -----------------
+
+[operador@localhost sketchbook]$ git pull
+gituser@nas00's password: 
+remote: Counting objects: 6, done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 5 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (5/5), done.
+From ssh://nas00/volume2/REPO.GIT/sketchbook
+   1b5414f..bfefc20  master     -> origin/master
+Updating 1b5414f..bfefc20
+Fast-forward
+ .gitmodules         | 6 ++++++
+ RASPBERRY/433utils  | 1 +
+ RASPBERRY/leeme.txt | 8 ++++++++
+ RASPBERRY/wiringPi  | 1 +
+ 4 files changed, 16 insertions(+)
+ create mode 100644 .gitmodules
+ create mode 160000 RASPBERRY/433utils
+ create mode 100644 RASPBERRY/leeme.txt
+ create mode 160000 RASPBERRY/wiringPi
+
+
+# -- -----------------
+# -- -----------------
+# -- -----------------
+# -- -----------------
+# -- -----------------
+# -- -----------------
