@@ -1,0 +1,6 @@
+[submodule "RASPBERRY/wiringPi"]
+	path = RASPBERRY/wiringPi
+	url = git://git.drogon.net/wiringPi
+[submodule "RASPBERRY/433utils"]
+	path = RASPBERRY/433utils
+	url = git://github.com/ninjablocks/433utils.git
