@@ -14,6 +14,7 @@
 # -- -----------------
 # -- ACTUALIZAR REPO LOCAL
 # -- -----------------
+# -- COPIAR EN GITHUB
 # -- -----------------
 # -- -----------------
 # -- -----------------
@@ -578,6 +579,49 @@ Changes to be committed:
  1 file changed, 1 deletion(-)
  delete mode 160000 libraries/rc-switch
 
+
+# -- -----------------
+# -- COPIAR EN GITHUB
+# -- -----------------
+
+1. Crear repositorio en Github
+
+ https://github.com/jlferrin/sketchbook.git
+
+2. Añadir el nuevo repositorio remoto al proyecto:
+ Se debe escoger un nombre que no exista sino dará error:
+
+[operador@localhost sketchbook]$ git remote add origin https://github.com/jlferrin/sketchbook.git
+fatal: remote origin already exists.
+
+ Verificamos los repo remoto actuales:
+
+[operador@localhost sketchbook]$ git remote -v
+origin	ssh://gituser@nas00/volume2/REPO.GIT/sketchbook.git (fetch)
+origin	ssh://gituser@nas00/volume2/REPO.GIT/sketchbook.git (push)
+
+ Escogemos un nombre:
+
+[operador@localhost sketchbook]$ git remote add github https://github.com/jlferrin/sketchbook.git
+
+[operador@localhost sketchbook]$ git remote -v
+github	https://github.com/jlferrin/sketchbook.git (fetch)
+github	https://github.com/jlferrin/sketchbook.git (push)
+origin	ssh://gituser@nas00/volume2/REPO.GIT/sketchbook.git (fetch)
+origin	ssh://gituser@nas00/volume2/REPO.GIT/sketchbook.git (push)
+
+ Subimos el repo:
+
+[operador@localhost sketchbook]$ git push github master
+Username for 'https://github.com': jlferrin@gmail.com
+Password for 'https://jlferrin@gmail.com@github.com': 
+Counting objects: 85, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (66/66), done.
+Writing objects: 100% (85/85), 55.43 KiB | 0 bytes/s, done.
+Total 85 (delta 18), reused 0 (delta 0)
+To https://github.com/jlferrin/sketchbook.git
+ * [new branch]      master -> master
 
 # -- -----------------
 # -- -----------------
