@@ -482,9 +482,103 @@ Fast-forward
  create mode 100644 RASPBERRY/leeme.txt
  create mode 160000 RASPBERRY/wiringPi
 
+-- EJEMPLO INVERSO
+
+[operador@localhost sketchbook]$ git submodule add https://github.com/sui77/rc-switch libraries/rc-switch
+Cloning into 'libraries/rc-switch'...
+remote: Counting objects: 274, done.
+remote: Total 274 (delta 0), reused 0 (delta 0), pack-reused 274
+Receiving objects: 100% (274/274), 68.71 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (148/148), done.
+Checking connectivity... done.
+[operador@localhost sketchbook]$ ll libraries/rc-switch/
+total 39
+drwxrwxr-x. 11 operador operador  1024 nov 24 01:05 examples
+-rw-rw-r--.  1 operador operador  1194 nov 24 01:05 keywords.txt
+-rw-rw-r--.  1 operador operador 24777 nov 24 01:05 RCSwitch.cpp
+-rw-rw-r--.  1 operador operador  5060 nov 24 01:05 RCSwitch.h
+-rw-rw-r--.  1 operador operador   792 nov 24 01:05 README.md
+[operador@localhost sketchbook]$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   .gitmodules
+	new file:   libraries/rc-switch
+
+[operador@localhost sketchbook]$ cat .gitmodules 
+[submodule "RASPBERRY/wiringPi"]
+	path = RASPBERRY/wiringPi
+	url = git://git.drogon.net/wiringPi
+[submodule "RASPBERRY/433utils"]
+	path = RASPBERRY/433utils
+	url = git://github.com/ninjablocks/433utils.git
+[submodule "libraries/rc-switch"]
+	path = libraries/rc-switch
+	url = https://github.com/sui77/rc-switch
+[operador@localhost sketchbook]$ git commit -m "Submodulo: rc-switch"
+[master 9ce84f5] Submodulo: rc-switch
+ 2 files changed, 4 insertions(+)
+ create mode 160000 libraries/rc-switch
+[operador@localhost sketchbook]$ 
+[operador@localhost sketchbook]$ 
+[operador@localhost sketchbook]$ git push origin
+gituser@nas00's password: 
+Counting objects: 6, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 640 bytes | 0 bytes/s, done.
+Total 6 (delta 4), reused 0 (delta 0)
+To ssh://gituser@nas00/volume2/REPO.GIT/sketchbook.git
+   cae25a0..9ce84f5  master -> master
+
+i@raspberrypi ~/sketchbook $ git pull
+gituser@nas00's password: 
+remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 6 (delta 4), reused 0 (delta 0)
+Unpacking objects: 100% (6/6), done.
+From ssh://nas00/volume2/REPO.GIT/sketchbook
+   cae25a0..9ce84f5  master     -> origin/master
+Updating cae25a0..9ce84f5
+Fast-forward
+ .gitmodules |    3 +++
+ 1 file changed, 3 insertions(+)
+pi@raspberrypi ~/sketchbook $ git submodule init
+Submodule 'RASPBERRY/433utils' () registered for path 'RASPBERRY/433utils'
+Submodule 'RASPBERRY/wiringPi' () registered for path 'RASPBERRY/wiringPi'
+Submodule 'libraries/rc-switch' (https://github.com/sui77/rc-switch) registered for path 'libraries/rc-switch'
+pi@raspberrypi ~/sketchbook $ git submodule update
+Cloning into 'libraries/rc-switch'...
+remote: Counting objects: 274, done.
+remote: Total 274 (delta 0), reused 0 (delta 0), pack-reused 274
+Receiving objects: 100% (274/274), 68.71 KiB, done.
+Resolving deltas: 100% (148/148), done.
+Submodule path 'libraries/rc-switch': checked out '526cd280108a111e54a80479515c9ffb9edfce71'
+
 
 # -- -----------------
+# -- BORRAR DIRECTORIO Y CONTENIDOS
 # -- -----------------
+
+[operador@localhost sketchbook]$ rm -rf libraries/rc-switch/
+[operador@localhost sketchbook]$ git add .
+[operador@localhost sketchbook]$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	deleted:    libraries/rc-switch
+
+[operador@localhost sketchbook]$ git commit -m "Borrado rc-switch"
+[master 508ac99] Borrado rc-switch
+ 1 file changed, 1 deletion(-)
+ delete mode 160000 libraries/rc-switch
+
+
 # -- -----------------
 # -- -----------------
 # -- -----------------
