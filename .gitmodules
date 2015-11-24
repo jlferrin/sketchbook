@@ -4,3 +4,6 @@
 [submodule "RASPBERRY/433utils"]
 	path = RASPBERRY/433utils
 	url = git://github.com/ninjablocks/433utils.git
+[submodule "libraries/rc-switch"]
+	path = libraries/rc-switch
+	url = https://github.com/sui77/rc-switch
