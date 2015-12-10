@@ -10,3 +10,6 @@
 [submodule "RASPBERRY/termoxest_wapp"]
 	path = RASPBERRY/termoxest_wapp
 	url = git://github.com/jlferrin/termoxest_wapp.git
+[submodule "RASPBERRY/pi-blaster"]
+	path = RASPBERRY/pi-blaster
+	url = https://github.com/hybridgroup/pi-blaster.git

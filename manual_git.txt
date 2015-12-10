@@ -276,6 +276,11 @@ $(EXECUTABLE): $(OBJECTS)
 clean:
 	rm *.o mistat
 
+# BRANCH REMOTO
+# -- -----------------
+
+git push origin branch
+
 # -- -----------------
 # -- CREACION DE REPO
 # -- -----------------
