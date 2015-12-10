@@ -1,0 +1,62 @@
+
+
+Raspberry Pi Model A, B, B+ and Compute Module 
+wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv6l.tar.gz 
+tar -xvf node-v4.0.0-linux-armv6l.tar.gz 
+cd node-v4.0.0-linux-armv6l
+
+Raspberry Pi 2 Model B 
+wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv7l.tar.gz 
+tar -xvf node-v4.0.0-linux-armv7l.tar.gz 
+cd node-v4.0.0-linux-armv7l
+
+-- 
+
+export NODE_JS_HOME=/home/pi/node-v0.10.2-linux-arm-pi  
+export PATH=$PATH:$NODE_JS_HOME/bin  
+
+- Otras opciones
+
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+---
+
+git clone https://github.com/carlosazaustre/raspberrypi-api-led
+
+---
+
+wget http://nodejs.org/dist/v0.10.2/node-v0.10.2-linux-arm-pi.tar.gz  
+tar -xvzf node-v0.10.2-linux-arm-pi.tar.gz  
+node-v0.10.2-linux-arm-pi/bin/node --version  
+---
+
+
+sudo usermod -G gpio pi
+
+And also add the following udev rules file to /etc/udev/rules.d/91-gpio.rules:
+
+SUBSYSTEM=="gpio", KERNEL=="gpiochip*", ACTION=="add", PROGRAM="/bin/sh -c 'chown root:gpio /sys/class/gpio/export /sys/class/gpio/unexport ; chmod 220 /sys/class/gpio/export /sys/class/gpio/unexport'"
+SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add", PROGRAM="/bin/sh -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
+
+Enabling the Raspberry Pi i2c on Raspbian
+
+You must add these two entries to your /etc/modules
+
+i2c-bcm2708
+i2c-dev
+
+You must also ensure that these entries are commented in your /etc/modprobe.d/raspi-blacklist.conf
+
+#blacklist spi-bcm2708
+#blacklist i2c-bcm2708
+You will also need to update the /boot/config.txt file. Edit it add the following text:
+
+dtparam=i2c1=on
+dtparam=i2c_arm=on
+Finally, you need to allow the pi user permissions to access the i2c interface by running this command:
+
+sudo usermod -G i2c pi
+Now restart your Raspberry Pi.
+
+----

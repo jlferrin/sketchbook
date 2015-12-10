@@ -7,3 +7,6 @@
 [submodule "libraries/rc-switch"]
 	path = libraries/rc-switch
 	url = https://github.com/sui77/rc-switch
+[submodule "RASPBERRY/termoxest_wapp"]
+	path = RASPBERRY/termoxest_wapp
+	url = git://github.com/jlferrin/termoxest_wapp.git
