@@ -279,7 +279,60 @@ clean:
 # BRANCH REMOTO
 # -- -----------------
 
-git push origin branch
+- Subirlo a un repo remoto:
+
+pi@raspberrypi ~/devel/termoxest_wapp $ git push origin master
+gituser@nas00's password: 
+Counting objects: 37, done.
+Compressing objects: 100% (31/31), done.
+Writing objects: 100% (31/31), 50.66 KiB, done.
+Total 31 (delta 9), reused 0 (delta 0)
+To ssh://gituser@nas00/volume2/REPO.GIT/termoxest_wapp.git
+   ec92b22..bd73cb3  master -> master
+
+pi@raspberrypi ~/devel/termoxest_wapp $ git push origin Interface00
+gituser@nas00's password: 
+Counting objects: 11, done.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 522 bytes, done.
+Total 6 (delta 3), reused 0 (delta 0)
+To ssh://gituser@nas00/volume2/REPO.GIT/termoxest_wapp.git
+ * [new branch]      Interface00 -> Interface00
+
+pi@raspberrypi ~/devel/termoxest_wapp $ git remote -v show origin
+gituser@nas00's password: 
+* remote origin
+  Fetch URL: ssh://gituser@nas00/volume2/REPO.GIT/termoxest_wapp.git
+  Push  URL: ssh://gituser@nas00/volume2/REPO.GIT/termoxest_wapp.git
+  HEAD branch: master
+  Remote branches:
+    Interface00 tracked
+    master      tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local refs configured for 'git push':
+    Interface00 pushes to Interface00 (up to date)
+    master      pushes to master      (up to date)
+
+pi@raspberrypi ~/devel/termoxest_wapp $ git remote -v show github
+* remote github
+  Fetch URL: https://github.com/jlferrin/termoxest_wapp.git
+  Push  URL: https://github.com/jlferrin/termoxest_wapp.git
+  HEAD branch: master
+  Remote branches:
+    Interface00 tracked
+    master      tracked
+  Local refs configured for 'git push':
+    Interface00 pushes to Interface00 (up to date)
+    master      pushes to master      (up to date)
+
+-Clonarlo en local:
+
+[operador@localhost termoxest_wapp]$ git fetch origin Interface00:Interface00
+gituser@nas00's password: 
+From ssh://nas00/volume2/REPO.GIT/termoxest_wapp
+ * [new branch]      Interface00 -> Interface00
+
 
 # -- -----------------
 # -- CREACION DE REPO
