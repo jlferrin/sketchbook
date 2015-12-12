@@ -16,6 +16,7 @@
 # -- -----------------
 # -- COPIAR EN GITHUB
 # -- -----------------
+# -- TAGS
 # -- -----------------
 # -- -----------------
 # -- -----------------
@@ -681,6 +682,26 @@ Total 85 (delta 18), reused 0 (delta 0)
 To https://github.com/jlferrin/sketchbook.git
  * [new branch]      master -> master
 
+# -- -----------------
+# -- TAGS
+# -- -----------------
+
+$ git log --pretty=oneline
+
+a8eff4c50d236cab27291c219ec1ae06240592a4 Parte de cliente
+b83b3009e237ce1731d33936d81ede342d2e7f7b EjemloListo-i2c
+ec92b225c76d48f79584b7855d7b4c3424016e6d Primer commit. Nov 2015
+
+[operador@localhost termoxest_wapp]$ git tag -a primerCommit ec92b225c76d48f79584b7855d7b
+[operador@localhost termoxest_wapp]$ git tag
+primerCommit
+
+
+# -- -----------------
+# -- -----------------
+# -- -----------------
+# -- -----------------
+# -- -----------------
 # -- -----------------
 # -- -----------------
 # -- -----------------
