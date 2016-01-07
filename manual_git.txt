@@ -334,6 +334,11 @@ gituser@nas00's password:
 From ssh://nas00/volume2/REPO.GIT/termoxest_wapp
  * [new branch]      Interface00 -> Interface00
 
+# BRANCH AL PASADO
+# -- -----------------
+
+git branch v2.0 primerCommit
+
 
 # -- -----------------
 # -- CREACION DE REPO
@@ -695,6 +700,20 @@ ec92b225c76d48f79584b7855d7b4c3424016e6d Primer commit. Nov 2015
 [operador@localhost termoxest_wapp]$ git tag -a primerCommit ec92b225c76d48f79584b7855d7b
 [operador@localhost termoxest_wapp]$ git tag
 primerCommit
+
+- Creando en la rama actual:
+
+git tag -a v1.4 -m "my version 1.4"
+
+- Los tags no se propagan al repo remoto, hay que forzalo:
+
+[operador@localhost termoxest_wapp]$ git push origin --tags
+gituser@nas00's password: 
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 169 bytes | 0 bytes/s, done.
+Total 1 (delta 0), reused 0 (delta 0)
+To ssh://gituser@nas00/volume2/REPO.GIT/termoxest_wapp.git
+ * [new tag]         primerCommit -> primerCommit
 
 
 # -- -----------------
