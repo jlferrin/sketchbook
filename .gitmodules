@@ -13,3 +13,6 @@
 [submodule "RASPBERRY/pi-blaster"]
 	path = RASPBERRY/pi-blaster
 	url = https://github.com/hybridgroup/pi-blaster.git
+[submodule "RASPBERRY/RF24"]
+	path = RASPBERRY/RF24
+	url = git://github.com/TMRh20/RF24.git
